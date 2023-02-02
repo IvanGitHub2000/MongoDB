@@ -22,44 +22,51 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Katalog/Destinacije</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Destinacije">Katalog/Destinacije</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">O nama</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ONama">O nama</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Kontakt</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Kontakt">Kontakt</a>
                         </li>
 
                         <div class="desno" style="display:flex;">
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Login">Prijavi se</a>
-                         </li>
-                           <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Register">Registruj se</a>
-                           </li>
+                        </li>
 
-                        </div>
-
-                      
-                        @*@if (Model.Message != null)
-                        {
-                            if (Model.Message == "Admin")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-page="/Admin">Moj profil</a>
-                                </li>
-                            }
-                            if (Model.Message == "Menadzer")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-page="/Profile">Moj profil</a>
-                                </li>
-                            }
-                        }*@
-                    </ul>
-                   
                 </div>
+
+
+                @if (Model.Message != null)
+                {
+                    if (Model.Message == "Admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Admin">Moj profil</a>
+                        </li>
+                    }
+                    if (Model.Message == "Menadzer")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Profil">Moj profil</a>
+                        </li>
+                    }
+                }
+                </ul>
+                @if (Model.Message == null)
+                {
+                    <a class="btn btn-secondary btn-theme" asp-page="/Login">Log In</a>
+                }
+                else
+                {
+                    <a class="btn btn-secondary btn-theme" asp-page="/Index" asp-page-handler="Logout">Logout</a>
+                }
+            </div>
             </div>
         </nav>
     </header>

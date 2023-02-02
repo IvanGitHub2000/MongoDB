@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ivan\\source\\repos\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {}
+    "C:\\Users\\Ivan\\Desktop\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ivan\\source\\repos\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {
+    "C:\\Users\\Ivan\\Desktop\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
+        "projectUniqueName": "C:\\Users\\Ivan\\Desktop\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
         "projectName": "PROJEKAT_MONGODB",
-        "projectPath": "C:\\Users\\Ivan\\source\\repos\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
+        "projectPath": "C:\\Users\\Ivan\\Desktop\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
         "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ivan\\source\\repos\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\obj\\",
+        "outputPath": "C:\\Users\\Ivan\\Desktop\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",

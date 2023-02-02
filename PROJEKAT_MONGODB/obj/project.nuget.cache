@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3bZc78choofyuYRTTissvDtFv5Fok+nBnsfoGVaNsrJLxTIbqPRem4PWjSIzVKfVJi+BcP36wJeB1F8162BAAQ==",
+  "dgSpecHash": "rMvn1kY9NIk+6+Ws81l9MokhofBl2C8W6651dsIkay31B27LGkU6aKh8YIPrHZSLa0iL/ZfGa6sQfA0DhBMf+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ivan\\source\\repos\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
+  "projectFilePath": "C:\\Users\\Ivan\\Desktop\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ivan\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

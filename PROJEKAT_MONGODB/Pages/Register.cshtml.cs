@@ -32,7 +32,7 @@ namespace PROJEKAT_MONGODB.Pages
                 ErrorMessage = "This email address is already used";
                 return Page();
             }
-            //NoviKorisnik.tip = 0;
+            NoviKorisnik.Tip = 0;
             collection.InsertOne(NoviKorisnik);
             HttpContext.Session.SetString("email", NoviKorisnik.Email);
             //return RedirectToPage("/AddHotel");
