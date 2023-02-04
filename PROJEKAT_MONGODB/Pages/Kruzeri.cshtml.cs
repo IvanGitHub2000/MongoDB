@@ -28,7 +28,7 @@ namespace PROJEKAT_MONGODB.Pages
 
         public void OnGet(string grad, string drzava)
         {
-            String email = HttpContext.Session.GetString("email");
+            String email = HttpContext.Session.GetString("Email");
             if (email != null)
             {
                 Korisnik korisnik = ko.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();

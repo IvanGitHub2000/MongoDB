@@ -36,7 +36,7 @@ namespace PROJEKAT_MONGODB.Pages
 
         public void OnGet(string id)
         {
-            String email = HttpContext.Session.GetString("email");
+            String email = HttpContext.Session.GetString("Email");
             if (email != null)
             {
                 Korisnik korisnik = ko.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();
@@ -50,10 +50,15 @@ namespace PROJEKAT_MONGODB.Pages
             {
                 ponude.Add(p.Find(x => x.Id.Equals(pon.Id)).FirstOrDefault());
             }
-            foreach (MongoDBRef soba in kruzer.Kabine.ToList())
+            foreach (MongoDBRef kabina in kruzer.Kabine.ToList())
             {
-                kabine.Add(ka.Find(x => x.Id.Equals(soba.Id)).FirstOrDefault());
+                kabine.Add(ka.Find(x => x.Id.Equals(kabina.Id)).FirstOrDefault());//nzm ovo kako da resimo sve mu jebeem
+
             }
         }
+        //public static ObjectId ToObjectId(this ObjectId id)
+        //{
+        //    return new ObjectId(id);
+        //}
     }
 }

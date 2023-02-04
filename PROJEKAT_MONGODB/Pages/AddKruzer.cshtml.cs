@@ -46,7 +46,7 @@ namespace PROJEKAT_MONGODB.Pages
 
         public ActionResult OnGet()
         {
-            String email = HttpContext.Session.GetString("email");
+            String email = HttpContext.Session.GetString("Email");
             if (email == null) return RedirectToPage("/Login");
             if (email != null)
             {
@@ -59,9 +59,9 @@ namespace PROJEKAT_MONGODB.Pages
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (HttpContext.Session.GetString("email") == null)
+            if (HttpContext.Session.GetString("Email") == null)
                 return RedirectToPage("/Index");
-            Korisnik kor = await _dbKorisnici.Find(kor => kor.Email == HttpContext.Session.GetString("email")).FirstOrDefaultAsync();
+            Korisnik kor = await _dbKorisnici.Find(kor => kor.Email == HttpContext.Session.GetString("Email")).FirstOrDefaultAsync();
 
             List<Kabina> noveKabine = new List<Kabina>();
             foreach (string soba in sobe)

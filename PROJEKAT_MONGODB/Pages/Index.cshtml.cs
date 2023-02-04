@@ -42,11 +42,11 @@ namespace PROJEKAT_MONGODB.Pages
 
         public void OnGet()
         {
-            topRated = _dbKruzeri.AsQueryable<Kruzer>().OrderByDescending(Hotel => Hotel.BrojZvezdica).Take(2).ToList();
+            topRated = _dbKruzeri.AsQueryable<Kruzer>().OrderByDescending(Hotel => Hotel.BrojZvezdica).Take(4).ToList();
 
 
 
-            String email = HttpContext.Session.GetString("email");
+            String email = HttpContext.Session.GetString("Email");
             if (email != null)
             {
                 Korisnik k = _dbKorisnici.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();

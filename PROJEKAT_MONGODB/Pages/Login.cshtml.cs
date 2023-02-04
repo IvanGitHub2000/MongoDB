@@ -35,7 +35,7 @@ namespace PROJEKAT_MONGODB.Pages
             //return null;
             return Page();
             }
-                HttpContext.Session.SetString("email", Email);
+                HttpContext.Session.SetString("Email", Email);
                 ErrorMessage = "Uspesno logovan";
                 //return new JsonResult(k);
                 return RedirectToPage("/Index"); 

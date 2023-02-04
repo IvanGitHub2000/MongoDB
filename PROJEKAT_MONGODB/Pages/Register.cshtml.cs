@@ -34,9 +34,9 @@ namespace PROJEKAT_MONGODB.Pages
             }
             NoviKorisnik.Tip = 0;
             collection.InsertOne(NoviKorisnik);
-            HttpContext.Session.SetString("email", NoviKorisnik.Email);
-            //return RedirectToPage("/AddHotel");
-            return new JsonResult(NoviKorisnik);
+            HttpContext.Session.SetString("Email", NoviKorisnik.Email);
+            return RedirectToPage("/AddKruzer");
+            //return new JsonResult(NoviKorisnik);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace PROJEKAT_MONGODB.Pages
             var collectionGradovi = db.GetCollection<Grad>("gradovi");
             var collectionKorisnici = db.GetCollection<Korisnik>("korisnici");
 
-            String email = HttpContext.Session.GetString("email");
+            String email = HttpContext.Session.GetString("Email");
             if (email != null)
             {
                 Korisnik k = collectionKorisnici.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();

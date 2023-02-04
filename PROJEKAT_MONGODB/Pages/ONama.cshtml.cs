@@ -20,7 +20,7 @@ namespace PROJEKAT_MONGODB.Pages
             var db = client.GetDatabase("SEVENSEAS");
             var collection = db.GetCollection<Korisnik>("korisnici");
 
-            String email = HttpContext.Session.GetString("email");
+            String email = HttpContext.Session.GetString("Email");
             if (email != null)
             {
                 Korisnik k = collection.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();
