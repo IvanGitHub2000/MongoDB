@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Driver;
 using PROJEKAT_MONGODB.Model;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 
 namespace PROJEKAT_MONGODB.Pages
 {
@@ -56,27 +57,31 @@ namespace PROJEKAT_MONGODB.Pages
 
             menadzer = ko.Find(x => x.Tip == 0 && x.Email.Equals(email)).FirstOrDefault();
             String id = menadzer.Kruzer.Id.ToString();
+            //if(id==null)
+            //{
+            //    return RedirectToPage("/Index");
+            //}
             kruzer = kr.AsQueryable<Kruzer>().Where(x => x.Id == menadzer.Kruzer.Id).FirstOrDefault();
             foreach (MongoDBRef kabinaRef in kruzer.Kabine.ToList())
             {
-                kabine.Add(k.Find(x => x.Id.Equals(kabinaRef.Id)).FirstOrDefault());
+                kabine.Add(k.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
             }
             foreach (MongoDBRef ponudeRef in kruzer.Ponude.ToList())
             {
-                ponude.Add(p.Find(x => x.Id.Equals(ponudeRef.Id)).FirstOrDefault());
+                ponude.Add(p.Find(x => x.Id.Equals(new ObjectId(ponudeRef.Id.ToString()))).FirstOrDefault());
             }
         }
 
-        public ActionResult OnGetSoba(string oznaka)
+        public ActionResult OnGetKabina(string oznaka)
         {
-            String email = HttpContext.Session.GetString("email");
+            String email = HttpContext.Session.GetString("Email");
 
             menadzer = ko.Find(x => x.Tip == 0 && x.Email.Equals(email)).FirstOrDefault();
-            kruzer = kr.Find(x => x.Id.Equals(menadzer.Kruzer.Id)).FirstOrDefault();
+            kruzer = kr.Find(x => x.Id.Equals(new ObjectId(menadzer.Kruzer.Id.ToString()))).FirstOrDefault();
 
             foreach (MongoDBRef kabinaRef in kruzer.Kabine.ToList())
             {
-                kabine.Add(k.Find(x => x.Id.Equals(kabinaRef.Id)).FirstOrDefault());
+                kabine.Add(k.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
             }
             Kabina soba = kabine.Where(x => x.BrojKabine.Equals(oznaka)).FirstOrDefault();
             List<Rezervacija> rez = new List<Rezervacija>();
@@ -84,11 +89,11 @@ namespace PROJEKAT_MONGODB.Pages
 
             foreach (MongoDBRef rezRef in soba.Rezervacije.ToList())
             {
-                rez.Add(r.Find(x => x.Id.Equals(rezRef.Id)).FirstOrDefault());
+                rez.Add(r.Find(x => x.Id.Equals(new ObjectId(rezRef.Id.ToString()))).FirstOrDefault());
             }
             foreach (Rezervacija Rez in rez)
             {
-                ar.Add(p.Find(x => x.Id.Equals(Rez.Ponuda.Id)).FirstOrDefault());
+                ar.Add(p.Find(x => x.Id.Equals(new ObjectId(Rez.Ponuda.Id.ToString()))).FirstOrDefault());
             }
 
             List<string> datum = new List<string>();

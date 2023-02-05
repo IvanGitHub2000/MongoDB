@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using PROJEKAT_MONGODB.Model;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 
 namespace PROJEKAT_MONGODB.Pages
 {
@@ -69,8 +70,8 @@ namespace PROJEKAT_MONGODB.Pages
                 else Message = "Admin";
             }
 
-
-            kruzeri = kr.Find(x => true).ToList();
+         
+            var result = kr.Find(kruzer => true).ToList();
             rezervacije = r.Find(x => true).ToList();
             korisnici = ko.Find(x => x.Tip == 0).ToList();
             ponude = p.Find(x => true).ToList();

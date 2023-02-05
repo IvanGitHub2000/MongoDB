@@ -16,7 +16,7 @@ namespace PROJEKAT_MONGODB.Pages
         public void OnGet()
         {
             var client = new MongoClient("mongodb://localhost/?safe=true");
-            var db = client.GetDatabase("eTourist");
+            var db = client.GetDatabase("SEVENSEAS");
             var collection = db.GetCollection<Korisnik>("korisnici");
 
             String email = HttpContext.Session.GetString("Email");

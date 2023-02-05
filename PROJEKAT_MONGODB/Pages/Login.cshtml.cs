@@ -12,9 +12,9 @@ namespace PROJEKAT_MONGODB.Pages
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public string Email { get; set; }
+        public string email { get; set; }
         [BindProperty]
-        public string Sifra { get; set; }
+        public string sifra { get; set; }
         public string ErrorMessage { get; set; }
         public string Message { get; set; }
         public void OnGet()
@@ -27,18 +27,20 @@ namespace PROJEKAT_MONGODB.Pages
             var db = client.GetDatabase("SEVENSEAS");
             var collection = db.GetCollection<Korisnik>("korisnici");
 
-            Korisnik k = collection.AsQueryable<Korisnik>().Where(x => x.Email == Email && x.Sifra == Sifra).FirstOrDefault();
+            /*var filter = Builders<BsonDocument>.Filter.And(
+                Builders<BsonDocument>.Filter.Eq("email", email),
+                Builders<BsonDocument>.Filter.Eq("sifra", sifra)
+            );*/
 
-            if (k == null)
+            Korisnik k = collection.AsQueryable<Korisnik>().Where(x => x.Email == email && x.Sifra == sifra).FirstOrDefault();
+
+            if (k != null)
             {
-            ErrorMessage = "Invalid email address or password!";
-            //return null;
-            return Page();
+                HttpContext.Session.SetString("Email", email);
+                return RedirectToPage("/Index");
             }
-                HttpContext.Session.SetString("Email", Email);
-                ErrorMessage = "Uspesno logovan";
-                //return new JsonResult(k);
-                return RedirectToPage("/Index"); 
+            ErrorMessage = "Invalid email address or password!";
+            return Page();
         }
     }
 }

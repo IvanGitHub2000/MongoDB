@@ -42,7 +42,7 @@
 
                 <div id="Offers" class="tabcontent">
                     <h4 class="predstojece-rez">Offers</h4>
-                    <button><a asp-page="/AddAranzman" asp-route-hotelId=@Model.kruzer.Id.ToString()> Add offer</a></button>
+                    <button><a asp-page="/AddPonuda" asp-route-kruzerId=@Model.kruzer.Id.ToString()> Add offer</a></button>
                     @if (Model.ponude.Count == 0)
                     {
                         <label class="nema-rez">There are no offers!</label>
@@ -126,10 +126,12 @@
 <script>
     function vratiRez() {
         var soba = document.getElementById('sobaOznaka').value;
-        console.log(soba);
+        console.log(1);
+        console.log(soba)
+
         $.ajax({
             type: "GET",
-            url: '/Profile?handler=Soba',
+            url: '/Profil?handler=Kabina',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("XSRF-TOKEN",
                     $('input:hidden[name="__RequestVerificationToken"]').val());

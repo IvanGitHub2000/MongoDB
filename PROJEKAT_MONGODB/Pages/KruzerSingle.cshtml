@@ -87,7 +87,7 @@
                                             <td>@a.Pocetak.ToString("dd.MM.yyyy.")</td>
                                             <td>@a.Kraj.ToString("dd.MM.yyyy.")</td>
                                             <td>@a.Cena €</td>
-                                            <td style="text-align: center;"><button class="dugme"><a asp-page="/BookingForm" asp-route-id="@a.Id" asp-route-hotel="@Model.kruzer.Id">Reserve</a></button></td>
+                                            <td style="text-align: center;"><button class="dugme"><a asp-page="/BookingForm" asp-route-id="@a.Id" asp-route-kruzer="@Model.kruzer.Id">Reserve</a></button></td>
                                         </tr>
                                     }
                                 </tbody>
