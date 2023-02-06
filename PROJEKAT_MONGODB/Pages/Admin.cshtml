@@ -12,30 +12,30 @@
                     <button class="tablinks" onclick="openTable(event, 'Korisnici')">Korisnici</button>
                 </div>
 
-                <div id="Reservations" class="tabcontent">
+                <div id="Rezervacije" class="tabcontent">
                     <form method="post" class="rez-tabela">
-                        <h4 class="predstojece-rez">Reservations</h4>
-                        @if (Model.rezervacije.Count == 0)
+                        <h4 class="predstojece-rez">Rezervacije</h4>
+                        @*@if (Model.rezervacije.Count == 0)
                         {
                             <label class="nema-rez">There are no reservations!</label>
-                        }
+                        }*@
                         else
                         {
                             <div style="overflow-y:scroll; height:500px;">
                                 <table id="offers1" class="table" style="width:95%;">
                                     <thead>
                                         <tr>
-                                            <th>User's name</th>
-                                            <th>User's email</th>
-                                            <th>User's phone</th>
-                                            <th>Date</th>
-                                            <th>Hotel</th>
-                                            <th>Hotel's phone</th>
-                                            <th>Manager's name</th>
-                                            <th>Manager's email</th>
-                                            <th>Manager's phone</th>
-                                            <th>Offer</th>
-                                            <th>Price</th>
+                                            <th>Ime Korisnika</th>
+                                            <th>Korisnikov Mejl</th>
+                                            <th>Broj Telefona Korisnika</th>
+                                            <th>Datum</th>
+                                            <th>Kruzer</th>
+                                            <th>Kontakt Telefon Kruzera</th>
+                                            <th>Ime Menadzera</th>
+                                            <th>Email Menadzera</th>
+                                            <th>Broj Telefona Menadzera</th>
+                                            <th>Ponuda</th>
+                                            <th>Cena</th>
                                             <th>Status</th>
                                             <th></th>
                                             <th></th>
@@ -49,7 +49,7 @@
                                                 <td>@Model.rezervacije.ElementAt(i).PrezimeKorisnika</td>
                                                 <td>@Model.rezervacije.ElementAt(i).BrojTelefonaKorisnika</td>
                                                 <td>@Model.rezervacije.ElementAt(i).DatumKreiranja.ToString("dd.MM.yyyy.")</td>
-                                                <td><a asp-page="/Hotel-Single" asp-route-id="@Model.kruzeriRezervacija.ElementAt(i).Id">@Model.kruzeriRezervacija.ElementAt(i).Naziv</a></td>
+                                                <td><a asp-page="/KruzerSingle" asp-route-id="@Model.kruzeriRezervacija.ElementAt(i).Id">@Model.kruzeriRezervacija.ElementAt(i).Naziv</a></td>
                                                 <td>@Model.kruzeriRezervacija.ElementAt(i).KontaktTelefon</td>
                                                 <td>@Model.menadzeriRezervacija.ElementAt(i).Ime @Model.menadzeriRezervacija.ElementAt(i).Prezime</td>
                                                 <td>@Model.menadzeriRezervacija.ElementAt(i).Email</td>
@@ -57,10 +57,10 @@
                                                 <td>@Model.ponudeRezervacija.ElementAt(i).Pocetak.ToString("dd.MM.yyyy.") - @Model.ponudeRezervacija.ElementAt(i).Kraj.ToString("dd.MM.yyyy.")</td>
                                                 <td>@Model.ponudeRezervacija.ElementAt(i).Cena</td>
                                                 <td>@Model.rezervacije.ElementAt(i).Status</td>
-                                                <td><button class="otkaziRez" asp-route-id="@Model.rezervacije.ElementAt(i).Id" asp-page-handler="ObrisiRez" onclick="return confirm('Are you sure you want to delete this reservation?');">Delete</button></td>
-                                                @if (Model.rezervacije.ElementAt(i).Status == "Na cekanju")
+                                                <td><button class="otkaziRez" asp-route-id="@Model.rezervacije.ElementAt(i).Id" asp-page-handler="ObrisiRez" onclick="return confirm('Da li ste sigurni da zelite da obrisete ovu rezervaciju?');">Delete</button></td>
+                                                @if (Model.rezervacije.ElementAt(i).Status == "Na cekanju!")
                                                 {
-                                                    <td><button class="otkaziRez" asp-route-id="@Model.rezervacije.ElementAt(i).Id" asp-page-handler="StatusAktivno" onclick="return confirm('Are you sure you want to change status to Aktivno?');">Aktivno</button></td>
+                                                    <td><button class="otkaziRez" asp-route-id="@Model.rezervacije.ElementAt(i).Id" asp-page-handler="StatusAktivno" onclick="return confirm('Da li ste sigurni da zelite da promenite status na Aktivno?');">Aktivno</button></td>
 }
                                             </tr>
                                         }
@@ -71,13 +71,13 @@
                     </form>
                 </div>
 
-                <div id="Hotels" class="tabcontent">
+                <div id="Kruzeri" class="tabcontent">
                     <form method="post" class="rez-tabela">
-                        <h4 class="predstojece-rez">Hotels</h4>
-                        @if (Model.kruzeri.Count == 0)
+                        <h4 class="predstojece-rez">Kruzeri</h4>
+                        @*@if (Model.kruzeri.Count == 0)
                         {
                             <label class="nema-rez">There are no hotels!</label>
-                        }
+                        }*@
                         else
                         {
                             <div style="overflow-y:scroll; height:500px;">
@@ -85,30 +85,35 @@
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>Name</th>
-                                            <th>Hotel's phone</th>
-                                            <th>Manager's name</th>
-                                            <th>Manager's email</th>
-                                            <th>Manager's phone</th>
-                                            <th>State</th>
-                                            <th>City</th>
+                                            <th>Naziv</th>
+                                            <th>Kontakt Telefon Kruzera</th>
+                                            <th>Ime menadzera</th>
+                                            <th>Email Menadzera</th>
+                                            <th>Kontakt Telefon Menadzera</th>
+                                            <th>Drzava</th>
+                                            <th>Grad</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @for (int i = 0; i < @Model.ponudeRezervacija.Count; i++)
                                         {
-                                            <tr>
-                                                <td><a asp-page="/Hotel-Single" asp-route-id="@Model.kruzeri.ElementAt(i).Id"><img src="@Model.kruzeri.ElementAt(i).GlavnaSlika" style="width:150px; height:90px;"></a></td>
-                                                <td><a asp-page="/Hotel-Single" asp-route-id="@Model.ponudeRezervacija.ElementAt(i).Id">@Model.kruzeri.ElementAt(i).Naziv</a></td>
-                                                <td>@Model.kruzeriRezervacija.ElementAt(i).KontaktTelefon</td>
-                                                <td>@Model.menadzeri.ElementAt(i).Ime @Model.menadzeri.ElementAt(i).Prezime</td>
-                                                <td>@Model.menadzeri.ElementAt(i).Email</td>
-                                                <td>@Model.menadzeri.ElementAt(i).BrojTelefona</td>
-                                                <td>@Model.kruzeri.ElementAt(i).Drzava</td>
-                                                <td>@Model.kruzeri.ElementAt(i).Grad</td>
-                                                <td><button class="otkaziRez" asp-route-id="@Model.kruzeri.ElementAt(i).Id" asp-page-handler="ObrisiHotel" onclick="return confirm('Are you sure you want to delete this hotel?');">Delete</button></td>
-                                            </tr>
+                                            if(Model.ponudeRezervacija.ElementAt(i)==null || Model.menadzeri.ElementAt(i) == null || Model.menadzeri.ElementAt(i).Ime == null || Model.menadzeri.ElementAt(i).Prezime == null)
+                                            {
+                                            continue;
+                                        }
+                                        <tr>
+                                            <td><a asp-page="/KruzerSingle" asp-route-id="@Model.kruzeri.ElementAt(i).Id"><img src="@Model.kruzeri.ElementAt(i).GlavnaSlika" style="width:150px; height:90px;"></a></td>
+                                            <td><a asp-page="/KruzerSingle" asp-route-id="@Model.ponudeRezervacija.ElementAt(i).Id">@Model.kruzeri.ElementAt(i).Naziv</a></td>
+                                            <td>@Model.kruzeriRezervacija.ElementAt(i).KontaktTelefon</td>
+                                            
+                                            <td>@Model.menadzeri.ElementAt(i).Ime @Model.menadzeri.ElementAt(i).Prezime</td>
+                                            <td>@Model.menadzeri.ElementAt(i).Email</td>
+                                            <td>@Model.menadzeri.ElementAt(i).BrojTelefona</td>
+                                            <td>@Model.kruzeri.ElementAt(i).Drzava</td>
+                                            <td>@Model.kruzeri.ElementAt(i).Grad</td>
+                                            <td><button class="otkaziRez" asp-route-id="@Model.kruzeri.ElementAt(i).Id" asp-page-handler="ObrisiHotel" onclick="return confirm('Are you sure you want to delete this hotel?');">Delete</button></td>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -117,12 +122,12 @@
                     </form>
                 </div>
 
-                <div id="Users" class="tabcontent">
+                <div id="Korisnici" class="tabcontent">
                     <form method="post" class="rez-tabela">
                         <h4 class="predstojece-rez">Users</h4>
                         @if (Model.korisnici.Count == 0)
                         {
-                            <label class="nema-rez">There are no users!</label>
+                            <label class="nema-rez">Ne postoje korisnici!</label>
                         }
                         else
                         {
@@ -130,19 +135,20 @@
                                 <table id="offers" class="table" style="width:95%;">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Hotel</th>
-                                            <th>email</th>
-                                            <th>Phone</th>
-                                            <th>City</th>
+                                            <th>Naziv</th>
+                                            <th>Kruzer</th>
+                                            <th>Email</th>
+                                            <th>Kontakt Telefon</th>
+                                            <th>Grad</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @for (int i = 0; i < @Model.menadzeri.Count; i++)
-                                        {
+                                        { if (Model.menadzeri.ElementAt(i) == null)
+                                                continue;//IM A FUCKING GENIUS
                                             <tr>
                                                 <td>@Model.menadzeri.ElementAt(i).Ime @Model.menadzeri.ElementAt(i).Prezime</td>
-                                                <td><a asp-page="/Hotel-Single" asp-route-id="@Model.kruzeriMenadzera.ElementAt(i).Id">@Model.kruzeriMenadzera.ElementAt(i).Naziv</a></td>
+                                               @* <td><a asp-page="/KruzerSingle" asp-route-id="@Model.kruzeriMenadzera.ElementAt(i).Id">@Model.kruzeriMenadzera.ElementAt(i).Naziv</a></td>*@
                                                 <td>@Model.menadzeri.ElementAt(i).Email</td>
                                                 <td>@Model.menadzeri.ElementAt(i).BrojTelefona</td>
                                                 <td>@Model.menadzeri.ElementAt(i).Grad</td>

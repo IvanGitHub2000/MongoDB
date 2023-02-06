@@ -42,7 +42,7 @@ namespace PROJEKAT_MONGODB.Pages
 
         public void OnGet()
         {
-            topRated = _dbKruzeri.AsQueryable<Kruzer>().OrderByDescending(Hotel => Hotel.BrojZvezdica).Take(3).ToList();
+            topRated = _dbKruzeri.AsQueryable<Kruzer>().OrderByDescending(Hotel => Hotel.BrojZvezdica).Take(4).ToList();
 
 
 

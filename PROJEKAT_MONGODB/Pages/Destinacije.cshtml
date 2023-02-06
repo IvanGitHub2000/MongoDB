@@ -19,9 +19,9 @@
                     @*@foreach (var grad in drzava.gradovi)
                         {
                             <div class="float-top col-lg-4 col-md-6">
-                                <a asp-route-grad="@grad.naziv" asp-route-drzava="@drzava.naziv" asp-page="/Hotels"><img src="@grad.slika" class="img-responsive" alt=""></a>
+                                <a asp-route-grad="@grad.naziv" asp-route-drzava="@drzava.naziv" asp-page="/Kruzeri"><img src="@grad.slika" class="img-responsive" alt=""></a>
                                 <div class="float-lt feature-gd">
-                                        <h3><a asp-route-grad="@grad.naziv" asp-route-drzava="@drzava.naziv" asp-page="/Hotels">@grad.naziv</a> </h3>
+                                        <h3><a asp-route-grad="@grad.naziv" asp-route-drzava="@drzava.naziv" asp-page="/Kruzeri">@grad.naziv</a> </h3>
                                             <p> @grad.opis</p>
                                 </div>
                             </div>

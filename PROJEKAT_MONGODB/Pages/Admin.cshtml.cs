@@ -48,7 +48,7 @@ namespace PROJEKAT_MONGODB.Pages
             kr = database.GetCollection<Kruzer>("kruzeri");
             ka = database.GetCollection<Kabina>("kabine");
             ko = database.GetCollection<Korisnik>("korisnici");
-            p = database.GetCollection<Ponuda>("aranzmani");
+            p = database.GetCollection<Ponuda>("ponude");
             r = database.GetCollection<Rezervacija>("rezervacije");
             kruzeriMenadzera = new List<Kruzer>();
             menadzeriRezervacija = new List<Korisnik>();
@@ -70,15 +70,17 @@ namespace PROJEKAT_MONGODB.Pages
                 else Message = "Admin";
             }
 
-         
-            var result = kr.Find(kruzer => true).ToList();
+
+            //var test = values.Select(v => BsonSerializer.Deserialize<Property>(v));
+            //kruzeri = kr.Find(Builders<Kruzer>.Filter.Empty).ToList();
+            kruzeri = kr.Find(x => true).ToList();
             rezervacije = r.Find(x => true).ToList();
             korisnici = ko.Find(x => x.Tip == 0).ToList();
             ponude = p.Find(x => true).ToList();
             foreach (Rezervacija rez in rezervacije)
             {
-                ponudeRezervacija.Add(p.Find(x => x.Id.Equals(rez.Ponuda.Id)).FirstOrDefault());
-                kruzeriRezervacija.Add(kr.Find(x => x.Id.Equals(rez.Kruzer.Id)).FirstOrDefault());
+                ponudeRezervacija.Add(p.Find(x => x.Id.Equals(new ObjectId(rez.Ponuda.Id.ToString()))).FirstOrDefault());
+                kruzeriRezervacija.Add(kr.Find(x => x.Id.Equals( new ObjectId(rez.Kruzer.Id.ToString()))).FirstOrDefault());
             }
             foreach (Kruzer kruzer in kruzeriRezervacija)
             {
@@ -92,10 +94,18 @@ namespace PROJEKAT_MONGODB.Pages
                 menadzeri.Add(m);
 
             }
-            foreach (Korisnik kor in menadzeri)
-            {
-                kruzeriMenadzera.Add(kr.Find(x => x.Id.Equals(kor.Kruzer.Id)).FirstOrDefault());
-            }
+            //foreach (Korisnik kor in menadzeri)
+            //{
+            //    kruzeriMenadzera.Add(kr.Find(x => x.Id.Equals(new ObjectId(kor.Kruzer.Id.ToString()))).FirstOrDefault());
+            //}
+            //foreach (Korisnik kor in menadzeri)
+            //{
+            //    var kruzer = kr.Find(x => x != null && x.Id.Equals(new ObjectId(kor.Kruzer.Id.ToString()))).FirstOrDefault();
+            //    if (kruzer != null)
+            //    {
+            //        kruzeriMenadzera.Add(kruzer);
+            //    }
+            //}
             //PROMENI U PRIKAZU DA SE IME KORISNIKA VADI IZ REZERVACIJE, A NE IZ KORISNIKA
         }
 
