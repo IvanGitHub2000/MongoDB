@@ -134,7 +134,14 @@
                     <div class="grids4-info col-md-6" style="width: 100px;">
                         <a href="Hotel-Single?id=@Kruzer.Id"><img src="@Kruzer.GlavnaSlika" class="img-fluid" alt=""></a>
                         <div class="info-bg">
-                            <h5><a href="KruzerSingle?id=@Kruzer.Id">@Kruzer.Naziv , @Kruzer.Grad</a></h5>
+                            <h5><a href="KruzerSingle?id=@Kruzer.Id">
+                                @Kruzer.Naziv </a></h5>
+                            @foreach(var grad in Kruzer.Gradovi)
+                            {
+                                <h6>@grad.Naziv</h6>
+
+                            }
+                            
                             @*<p>@String.Concat(Hotel.Opis.Substring(0,500), "...") </p>*@
                             @*<p>Hotel </p>*@
 

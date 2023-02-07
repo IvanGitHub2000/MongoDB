@@ -74,7 +74,7 @@ namespace PROJEKAT_MONGODB.Pages
             //var test = values.Select(v => BsonSerializer.Deserialize<Property>(v));
             //kruzeri = kr.Find(Builders<Kruzer>.Filter.Empty).ToList();
             kruzeri = kr.Find(x => true).ToList();
-            rezervacije = r.Find(x => true).ToList();
+            rezervacije = r.Find(x => true).ToList();//kad se promeni status pukne na aktivno resi ovo sa if uslov neki
             korisnici = ko.Find(x => x.Tip == 0).ToList();
             ponude = p.Find(x => true).ToList();
             foreach (Rezervacija rez in rezervacije)
@@ -124,7 +124,7 @@ namespace PROJEKAT_MONGODB.Pages
 
         public IActionResult OnPostStatusAktivno(string id)
         {
-            var update = Builders<Rezervacija>.Update.Set("status", "Aktivno");
+            var update = Builders<Rezervacija>.Update.Set("Status", "Aktivno");
             var filter = Builders<Rezervacija>.Filter.Eq("Id", new ObjectId(id));
             r.UpdateOne(filter, update);
             return RedirectToPage();

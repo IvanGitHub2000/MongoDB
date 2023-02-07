@@ -15,12 +15,12 @@ namespace PROJEKAT_MONGODB.Model
         //public  List<string> Gradovi { get; set; }
 
         //public List<string> Drzave { get; set; }
-        public string Grad { get; set; }
-        public string Drzava { get; set; }
+        //public string Grad { get; set; }
+        //public string Drzava { get; set; }
 
 
-        //public List<MongoDBRef> Drzave { get; set; } = new List<MongoDBRef>();
-        //public List<MongoDBRef> Gradovi { get; set; } = new List<MongoDBRef>();
+        public List<Drzava> Drzave { get; set; } = new List<Drzava>();
+        public List<Grad> Gradovi { get; set; } = new List<Grad>();
 
         public string KontaktTelefon { get; set; }//da se kontaktira administracija tog kruzera za neka dalja pitanja
 

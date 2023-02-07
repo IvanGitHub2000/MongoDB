@@ -37,7 +37,7 @@ namespace PROJEKAT_MONGODB.Pages
                 else Message = "Admin";
             }
 
-            kruzeri = kr.Find(x => x.Grad.Equals(grad) && x.Drzava.Equals(drzava)).ToList();
+            kruzeri = kr.Find(x => x.Gradovi.Equals(grad) && x.Drzave.Equals(drzava)).ToList();
         }
     }
 }

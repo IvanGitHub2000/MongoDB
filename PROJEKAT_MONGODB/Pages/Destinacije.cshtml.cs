@@ -31,7 +31,9 @@ namespace PROJEKAT_MONGODB.Pages
             }
 
             //List<string> sveDrzave = collection.AsQueryable<Hotel>().OrderBy(x=>x.Drzava).Select(x=>x.Drzava).Distinct().ToList();
-            List<string> sveDrzave = collectionKruzeri.AsQueryable<Kruzer>().Select(x => x.Drzava).Distinct().ToList();
+            //foreach(Drzava d in )
+            //List<string> sveDrzave = collectionKruzeri.AsQueryable<Kruzer>().SelectMany(x => x.Drzave).Distinct().ToList();
+            List<string> sveDrzave = collectionKruzeri.AsQueryable<Kruzer>().SelectMany(x => x.Drzave).Select(x => x.Naziv).Distinct().ToList();
             listaDrzava = new List<Drzava>();
 
             foreach (string drzava in sveDrzave)
@@ -40,7 +42,8 @@ namespace PROJEKAT_MONGODB.Pages
                 d.Naziv = drzava;
                 d.Gradovi = new List<Grad>();
                 //d.gradovi = collection.AsQueryable<Hotel>().Where(x=>x.Drzava == drzava).OrderBy(x=>x.Grad).Select(x=>x.Grad).Distinct().ToList();
-                List<string> gradoviDrzave = collectionKruzeri.AsQueryable<Kruzer>().Where(x => x.Drzava == drzava).Select(x => x.Grad).Distinct().ToList();
+                //List<string> gradoviDrzave = collectionKruzeri.AsQueryable<Kruzer>().Where(x => x.Drzave == drzava).Select(x => x.Grad).Distinct().ToList();
+                List<string> gradoviDrzave = (List<string>)collectionKruzeri.AsQueryable<Kruzer>().Where(x => x.Drzave.Any(y => y.Naziv == drzava)).SelectMany(x => x.Gradovi).Select(z=>z.Naziv).Distinct().ToList();
                 foreach (string grad in gradoviDrzave)
                 {
                     Grad g = collectionGradovi.AsQueryable<Grad>().Where(x => x.Naziv == grad).FirstOrDefault();

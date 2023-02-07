@@ -42,6 +42,11 @@ namespace PROJEKAT_MONGODB.Pages
         public Kruzer noviKruzer { get; set; }
         [BindProperty]
         public List<string> sobe { get; set; }
+        [BindProperty]
+        public string cities { get; set; }
+        [BindProperty]
+        public string states { get; set; }
+
         public string Message { get; set; }
 
         public ActionResult OnGet()
@@ -109,6 +114,35 @@ namespace PROJEKAT_MONGODB.Pages
             {
                 RedirectToPage("/Error?errorCode=" + fe);
             }
+            //    var count = noviKruzer.Gradovi.Count;
+            //List<string> imena=new List<string>();
+            //foreach(Grad g in noviKruzer.Gradovi)
+            //{
+            //    imena.Add(g.Naziv);//samo prihvata poslednji
+            //}
+            //var c1 = noviKruzer.Drzave.Count;
+            //var siti1 = noviKruzer.Gradovi.Count;
+            //var x = noviKruzer.Drzave[0].Naziv;//OVO RADI BREEEEE
+            //var y = noviKruzer.Gradovi[0].Naziv;
+
+            string[] stateArray = states.Split(',');
+            string[] cityArray = cities.Split(',');
+
+            List<Grad> g1 = new List<Grad>();
+            List<Drzava> s1 = new List<Drzava>();
+            foreach (string city in cityArray)
+            {
+                g1.Add(new Grad { Naziv = city, Slika = "/images/g6.jpg", Opis = "Veoma lep grad!" });
+                Console.WriteLine(city);
+            }
+            foreach (string state in stateArray)
+            {
+                s1.Add(new Drzava { Naziv = state, Opis = "Veoma lepa drzava!" });
+                Console.WriteLine(state);
+            }
+            noviKruzer.Gradovi = g1;
+            noviKruzer.Drzave = s1;
+            
             await _dbKruzeri.InsertOneAsync(noviKruzer);
             foreach (Kabina s in noveKabine)
             {
@@ -124,11 +158,19 @@ namespace PROJEKAT_MONGODB.Pages
 
             var filter = Builders<Korisnik>.Filter.Eq(kori => kori.Id, kor.Id);
             var up = Builders<Korisnik>.Update.Set("Kruzer", new MongoDBRef("kruzeri", noviKruzer.Id));
-            if (_dbGradovi.Find(grad => grad.Naziv==noviKruzer.Grad).FirstOrDefault() == null)
-               
-                _dbGradovi.InsertOne(new Grad { Naziv = noviKruzer.Grad, Slika = "/images/g6.jpg", Opis = "Jedan od najlepsih gradova u svetu" });
+            //if (_dbGradovi.Find(grad => grad.Naziv==noviKruzer.Grad).FirstOrDefault() == null)
 
-            await _dbKorisnici.UpdateOneAsync(filter, up);
+        
+            foreach(Grad g in noviKruzer.Gradovi)
+            { 
+            if (_dbGradovi.Find(grad => grad.Naziv==g.Naziv).FirstOrDefault() == null)
+            {
+                    _dbGradovi.InsertOne(new Grad { Naziv = g.Naziv, Slika = "/images/g6.jpg", Opis = g.Opis});
+
+                }
+            }
+
+                await _dbKorisnici.UpdateOneAsync(filter, up);
             return RedirectToPage("/Index");
 
 
@@ -158,16 +200,16 @@ namespace PROJEKAT_MONGODB.Pages
         {
             //if (string.IsNullOrEmpty(noviKruzer.Adresa) || (string.IsNullOrWhiteSpace(noviKruzer.Adresa)))
             //    return false;
-            if (string.IsNullOrEmpty(noviKruzer.Grad) || (string.IsNullOrWhiteSpace(noviKruzer.Grad)))
-                return false;
+            //if (string.IsNullOrEmpty(noviKruzer.Grad) || (string.IsNullOrWhiteSpace(noviKruzer.Grad)))
+            //    return false;
             if (string.IsNullOrEmpty(noviKruzer.Opis) || (string.IsNullOrWhiteSpace(noviKruzer.Opis)))
                 return false;
             if (string.IsNullOrEmpty(noviKruzer.Naziv) || (string.IsNullOrWhiteSpace(noviKruzer.Naziv)))
                 return false;
             if (string.IsNullOrEmpty(noviKruzer.KontaktTelefon) || (string.IsNullOrWhiteSpace(noviKruzer.KontaktTelefon)))
                 return false;
-            if (string.IsNullOrEmpty(noviKruzer.Drzava) || (string.IsNullOrWhiteSpace(noviKruzer.Drzava)))
-                return false;
+            //if (string.IsNullOrEmpty(noviKruzer.Drzava) || (string.IsNullOrWhiteSpace(noviKruzer.Drzava)))
+            //    return false;
             if (noviKruzer.BrojZvezdica < 1 || noviKruzer.BrojZvezdica > 6)
                 return false;
             

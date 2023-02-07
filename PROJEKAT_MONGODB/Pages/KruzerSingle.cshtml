@@ -42,8 +42,28 @@
 
                     <div class="contentwithphoto-top">
                         <div class="column contentwithphoto-text mt-4">
-                            <h3>Hotel Description</h3>
+                            <h3>Opis kruzera</h3>
                             <p>@Model.kruzer.Opis</p>
+                        </div>
+                    </div>
+                    <div class="contentwithphoto-top">
+                        <div class="column contentwithphoto-text mt-4">
+                            <h3>Gradovi kroz koje prolazi: </h3>
+                            @foreach(var grad in Model.kruzer.Gradovi)
+            {
+                <h3>@grad.Naziv</h3>
+            }
+
+                        </div>
+                    </div>
+                    <div class="contentwithphoto-top">
+                        <div class="column contentwithphoto-text mt-4">
+                            <h3>Drzave kroz koje prolazi:</h3>
+                            @foreach (var drzava in Model.kruzer.Drzave)
+                            {
+                                <h3>@drzava.Naziv</h3>
+                            }
+
                         </div>
                     </div>
 
@@ -75,9 +95,9 @@
                             <h3>Offers</h3>
                             <table id="offers">
                                 <thead>
-                                <th>Start date</th>
-                                <th>End date</th>
-                                <th>Price</th>
+                                <th>Pocetak putovanja/ponude</th>
+                                <th>Kraj putovanja/ponude</th>
+                                <th>Cena</th>
                                 <th></th>
                                 </thead>
                                 <tbody>

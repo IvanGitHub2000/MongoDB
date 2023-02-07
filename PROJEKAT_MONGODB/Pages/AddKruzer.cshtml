@@ -27,12 +27,12 @@
                         </span>*@
                     <span class="bi-city wow fadeInRight">
                         <div class="form-element-label">City*</div>
-                        <input type="text" id="city-val" value="" asp-for="noviKruzer.Grad">
+                        <input type="text" id="city-val" value="" asp-for="cities">
                         <label class="error" style="visibility: hidden;">This field is required.</label>
                     </span>
                     <span class="bi-city wow fadeInRight">
                         <div class="form-element-label">Country*</div>
-                        <input type="text" id="country-val" value="" asp-for="noviKruzer.Drzava">
+                        <input type="text" id="country-val" value="" asp-for="states">
                         <label class="error" style="visibility: hidden;">This field is required.</label>
                     </span>
                     <span class="bi-mapBtn wow fadeInRight">
@@ -143,10 +143,8 @@
             picReader.fileName = file.name;
             picReader.addEventListener("load", function (event) {
                 var picFile = event.target;
-
                 var tr = document.createElement("tr");
                 tr.className = "imported-picture";
-
                 let td = document.createElement("td");
                 let img = document.createElement("img");
                 img.width = 150;
@@ -154,30 +152,24 @@
                 img.src = picFile.result;
                 td.appendChild(img);
                 tr.appendChild(td);
-
                 td = document.createElement("td");
                 let inp = document.createElement("input");
                 inp.type = "radio";
                 inp.name = "mainPicture";
                 td.appendChild(inp);
                 tr.appendChild(td);
-
                 td = document.createElement("td");
                 td.style.fontSize = "30px";
                 let icon = document.createElement("i");
                 icon.className = "fas fa-trash-alt"
                 td.appendChild(icon);
                 tr.appendChild(td);
-
                 td = document.createElement("td");
                 tr.appendChild(td);
                 let div = document.createElement("div");
                 div.innerHTML = (picFile.fileName.length > 7) ? picFile.fileName.substring(0, 7) + "..." : picFile.fileName;
                 td.appendChild(div);
-
                 output.appendChild(tr);
-
-
                 tr.querySelector("i").onclick = function removePictureAction() {
                     output.removeChild(tr);
                     makeOneChecked();
@@ -185,7 +177,6 @@
                     if (currImported == 0) {
                         output.parentElement.style.display = "none";
                         alertUser("Import 4 pictures");
-
                     } else if (currImported < 4) {
                         let pom = 4 - currImported;
                         if (pom == 1)
@@ -199,34 +190,26 @@
                     let rows = output.querySelectorAll(".imported-picture");
                     if (rows.length == 0)
                         filesInput.value = null;
-
                 }
                 resolve(".")
             });
-
             picReader.readAsDataURL(file)
-
         });
     }
-
     function makeOneChecked() {
         let rows = document.querySelectorAll(".imported-picture");
         let oneIsChecked = false;
         rows.forEach((row) => {
-
             if (row.querySelector("input").checked) {
                 oneIsChecked = true;
-
             }
         });
         if (rows.length > 0) {
             if (!oneIsChecked) {
                 document.querySelector(".imported-picture").querySelector("input").checked = true;
             }
-
         }
     }
-
     function alertUser(info) {
         if (info != "") {
             document.querySelector(".image-user-info").innerHTML = info;
@@ -236,14 +219,10 @@
             document.querySelector(".image-user-info").innerHTML = info;
             document.querySelector(".image-user-info").style.display = "none";
         }
-
     }
-
     window.onload = function () {
-
         if (window.File && window.FileList && window.FileReader) {
             var filesInput = document.getElementById("import-files");
-
             filesInput.addEventListener("change", function pictureNotificationMessage(event) {
                 let currImported = document.querySelectorAll(".imported-picture").length;
                 var files = event.target.files; //FileList object
@@ -253,13 +232,10 @@
                     if (!files[index].type.match('image')) {
                         faultyImages++;
                     }
-
                 if (files.length - faultyImages + currImported < 4) {
                     let pom = 4 - (files.length - faultyImages + currImported);
                     if (pom == 1) { alertUser("Upload " + pom + " more picture!"); }
                     else { alertUser("Upload " + pom + " more pictures!"); }
-
-
                 }
                 else if (files.length + currImported > 4) {
                     let pom = 4 - currImported;
@@ -273,23 +249,18 @@
                 }
                 else
                     alertUser("");
-
                 let niz = new Array()
                 for (var i = 0; i < files.length; i++) {
                     let rez = makeMeFileApiPromise(i, output, files, event, filesInput);
                     niz.push(rez);
-
                 }
-
                 Promise.all(niz).then(x => {
                     console.log(document.querySelectorAll(".imported-picture").length);
                     makeOneChecked();
-
                 }).catch(x => {
                     console.log(document.querySelectorAll(".imported-picture").length);
                     makeOneChecked()
                 });
-
             });
         }
         else {
@@ -318,17 +289,12 @@
         icon.onclick = (ev) => {
             ev.target.parentElement.remove();
         }
-
-
-
-
         par.appendChild(span);
         el.name = "sobe";
         el.type = "text";
         el.readOnly = "disabled";
         el.value = labela.value + "|" + no.value;
         counter++;
-
     }
     function formError() {
         let select = document.querySelector("#bi-business-star");
@@ -339,19 +305,11 @@
         document.querySelectorAll("input[type=text]").forEach(el => {
             if (el.value == "" && el.id != "room-label")
                 return true;
-
         });
         if (document.querySelectorAll("[name^=sobe]").length == 0)
             return true;
-
-
-
-
-
     }
     document.querySelector("#signupForm").onsubmit = function submitFormAction(e) {
-
-
         let pictureIndex = 1;
         document.querySelectorAll(".imported-picture img").forEach((slika, index) => {
             if (slika.parentElement.parentElement.querySelector("input").checked) {
@@ -361,17 +319,11 @@
                 document.querySelector("#img-src-" + pictureIndex).value = slika.src;
                 pictureIndex++;
             }
-
         });
-
-
         if (formError()) {
             alert("Niste uneli sve neophodne podatke");
             return false;
         }
-
         return true;
     }
-
-
 </script>
