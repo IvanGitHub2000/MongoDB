@@ -7,45 +7,45 @@
         <div class="container py-md-3">
             <div style="margin-bottom:10px;" class="tabelaRez-info">
                 <div class="tab">
-                    <button class="tablinks" onclick="openTable(event, 'Reservations')">Reservations</button>
-                    <button class="tablinks" onclick="openTable(event, 'Offers')">Offers</button>
-                    <button class="tablinks" onclick="openTable(event, 'Rooms')">Rooms</button>
+                    <button class="tablinks" onclick="openTable(event, 'Rezervacije')">Rezervacije</button>
+                    <button class="tablinks" onclick="openTable(event, 'Ponude')">Ponude</button>
+                    <button class="tablinks" onclick="openTable(event, 'Kabine')">Kabine</button>
                 </div>
 
-                <div id="Reservations" class="tabcontent">
-                    <h4 class="predstojece-rez">Reservations</h4>
+                <div id="Rezervacije" class="tabcontent">
+                    <h4 class="predstojece-rez">Rezervacije</h4>
                     <div>
-                        <select id="sobaOznaka">
-                            <option value="0">Room</option>
+                        <select id="kabinaOznaka">
+                            <option value="0">Kabina</option>
                             @for (int i = 0; i < @Model.kabine.Count; i++)
                             {
                                 <option value="@Model.kabine.ElementAt(i).BrojKabine">@Model.kabine.ElementAt(i).BrojKabine (@Model.kabine.ElementAt(i).BrojMesta)</option>
                             }
                         </select>
-                        <button type="submit" onclick="vratiRez()">See availability</button>
+                        <button type="submit" onclick="vratiRez()">Proveri rezervaciju</button>
                         <div style="overflow-y:scroll; height:500px; margin-top:20px;">
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
                                     <tr>
-                                        <th>Date of reservation</th>
+                                        <th>Datum rezervacije</th>
                                         <th>Status</th>
-                                        <th>Start date</th>
-                                        <th>End date</th>
+                                        <th>Datum pocetka rezervacije</th>
+                                        <th>Datum kraja rezervacije</th>
                                     </tr>
                                 </thead>
-                                <tbody id="soba">
+                                <tbody id="kabina">
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <div id="Offers" class="tabcontent">
-                    <h4 class="predstojece-rez">Offers</h4>
-                    <button><a asp-page="/AddPonuda" asp-route-kruzerId=@Model.kruzer.Id.ToString()> Add offer</a></button>
+                <div id="Ponude" class="tabcontent">
+                    <h4 class="predstojece-rez">Ponude</h4>
+                    <button><a asp-page="/AddPonuda" asp-route-kruzerId=@Model.kruzer.Id.ToString()> Dodaj ponudu</a></button>
                     @if (Model.ponude.Count == 0)
                     {
-                        <label class="nema-rez">There are no offers!</label>
+                        <label class="nema-rez">Ponude ne postoje!</label>
                     }
                     else
                     {
@@ -53,9 +53,9 @@
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
                                     <tr>
-                                        <th>Start date</th>
-                                        <th>End date</th>
-                                        <th>Price</th>
+                                        <th>Datum pocetka ponude</th>
+                                        <th>Datum kraja ponude</th>
+                                        <th>Cena u evrima</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,11 +73,11 @@
                     }
                 </div>
 
-                <div id="Rooms" class="tabcontent">
-                    <h4 class="predstojece-rez">Rooms</h4>
+                <div id="Kabine" class="tabcontent">
+                    <h4 class="predstojece-rez">Kabine</h4>
                     @if (Model.kabine.Count == 0)
                     {
-                        <label class="nema-rez">There are no rooms!</label>
+                        <label class="nema-rez">Ne postoje kabine!</label>
                     }
                     else
                     {
@@ -85,8 +85,8 @@
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Num. of beds</th>
+                                        <th>Naziv kabine</th>
+                                        <th>Broj kreveta</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -125,9 +125,9 @@
 
 <script>
     function vratiRez() {
-        var soba = document.getElementById('sobaOznaka').value;
+        var kabina = document.getElementById('kabinaOznaka').value;
         console.log(1);
-        console.log(soba)
+        console.log(kabina)
 
         $.ajax({
             type: "GET",
@@ -136,11 +136,11 @@
                 xhr.setRequestHeader("XSRF-TOKEN",
                     $('input:hidden[name="__RequestVerificationToken"]').val());
             },
-            data: { oznaka: soba },
+            data: { oznaka: kabina },
             success: function (response) {
-                $("#soba").empty();
+                $("#kabina").empty();
                 if (response.length != 0) {
-                    var body = document.getElementById('soba');
+                    var body = document.getElementById('kabina');
                     for (var i = 0; i < response.datum.length; i++) {
                         var red = document.createElement("tr");
                         body.appendChild(red);

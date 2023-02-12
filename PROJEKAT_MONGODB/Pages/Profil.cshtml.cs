@@ -57,12 +57,9 @@ namespace PROJEKAT_MONGODB.Pages
 
             menadzer = ko.Find(x => x.Tip == 0 && x.Email.Equals(email)).FirstOrDefault();
             String id = menadzer.Kruzer.Id.ToString();
-            //if(id==null)
-            //{
-            //    return RedirectToPage("/Index");
-            //}
+           
             kruzer = kr.AsQueryable<Kruzer>().Where(x => x.Id == menadzer.Kruzer.Id).FirstOrDefault();
-            foreach (MongoDBRef kabinaRef in kruzer.Kabine.ToList())
+            foreach (MongoDBRef kabinaRef in kruzer.Kabine.ToList())//sredi ovo stavi if uslov za null i tjt,ne postoji kruzer ili kabine msm da ovo ne moz se desi ovako sve okej ovde
             {
                 kabine.Add(k.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
             }

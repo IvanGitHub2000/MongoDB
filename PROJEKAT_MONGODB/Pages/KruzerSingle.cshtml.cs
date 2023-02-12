@@ -44,15 +44,15 @@ namespace PROJEKAT_MONGODB.Pages
                     Message = "Menadzer";
                 else Message = "Admin";
             }
-            ObjectId idHotela = new ObjectId(id);
-            kruzer = kr.Find(x => x.Id.Equals(idHotela)).FirstOrDefault();
+            ObjectId idKruzera = new ObjectId(id);
+            kruzer = kr.Find(x => x.Id.Equals(idKruzera)).FirstOrDefault();
             foreach (MongoDBRef pon in kruzer.Ponude.ToList())
             {
                 ponude.Add(p.Find(x => x.Id.Equals(new ObjectId(pon.Id.ToString()))).FirstOrDefault());
             }
             foreach (MongoDBRef kabina in kruzer.Kabine.ToList())
             {
-                kabine.Add(ka.Find(x => x.Id.Equals(new ObjectId(kabina.Id.ToString()))).FirstOrDefault());//nzm ovo kako da resimo sve mu jebeem
+                kabine.Add(ka.Find(x => x.Id.Equals(new ObjectId(kabina.Id.ToString()))).FirstOrDefault());
 
             }
         }

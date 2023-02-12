@@ -65,7 +65,7 @@ namespace PROJEKAT_MONGODB.Pages
             novaPonuda.Kruzer = new MongoDBRef("kruzeri", new ObjectId(kruzerID));
             await _dbPonude.InsertOneAsync(novaPonuda);
 
-            var update = Builders<Kruzer>.Update.Push(Hotel => Hotel.Ponude, new MongoDBRef("aranzmani", novaPonuda.Id));
+            var update = Builders<Kruzer>.Update.Push(Hotel => Hotel.Ponude, new MongoDBRef("ponude", novaPonuda.Id));
             await _dbKruzeri.UpdateOneAsync(Hotel => Hotel.Id == new ObjectId(kruzerID), update);
             return RedirectToPage("/KruzerSingle", new { id = kruzerID });
         }

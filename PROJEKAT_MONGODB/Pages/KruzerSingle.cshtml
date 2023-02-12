@@ -70,29 +70,22 @@
                     <div class="work">
                         <div class="column con-bottom  mt-5">
                             <div class="con-bottom-left">
-                                <h4>Details</h4>
+                                <h4>Detalji</h4>
                                 <ul class="mt-4">
-                                    <li><span class="title-text">Number Of Rooms : </span> <span class="feature-count">@Model.kabine.Count</span></li>
-                                    <li><span class="title-text">Free Internet : </span> <span class="feature-count">Yes</span></li>
-                                    <li><span class="title-text">Phone-Number : </span> <span class="feature-count">@Model.kruzer.KontaktTelefon</span></li>
-                                    @*<li><span class="title-text">Address : </span> <span class="feature-count">@Model.kruzer.A</span></li>*@
+                                    <li><span class="title-text">Broj Kabina : </span> <span class="feature-count">@Model.kabine.Count</span></li>
+                                    <li><span class="title-text">Besplatan Internet : </span> <span class="feature-count">DA</span></li>
+                                    <li><span class="title-text">Kontakt Telefon : </span> <span class="feature-count">@Model.kruzer.KontaktTelefon</span></li>
+                                    
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="work" style="width:65%;">
-                        <div class="column con-bottom  mt-5">
-                            <div class="con-bottom-left">
-                                <h4>Location</h4>
-                                <div id="mapa" style="height:300px;"></div>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                     <div class="contentwithphoto-top" style="width:100%;">
                         <div class="column contentwithphoto-text mt-4" style="width:100%;">
-                            <h3>Offers</h3>
+                            <h3>Ponude</h3>
                             <table id="offers">
                                 <thead>
                                 <th>Pocetak putovanja/ponude</th>
@@ -107,7 +100,7 @@
                                             <td>@a.Pocetak.ToString("dd.MM.yyyy.")</td>
                                             <td>@a.Kraj.ToString("dd.MM.yyyy.")</td>
                                             <td>@a.Cena €</td>
-                                            <td style="text-align: center;"><button class="dugme"><a asp-page="/BookingForm" asp-route-id="@a.Id" asp-route-kruzer="@Model.kruzer.Id">Reserve</a></button></td>
+                                            <td style="text-align: center;"><button class="dugme"><a asp-page="/BookingForm" asp-route-id="@a.Id" asp-route-kruzer="@Model.kruzer.Id">Rezervisi</a></button></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -121,6 +114,4 @@
     </div>
 </section>
 
-@*<input id="lat" type="hidden" value="@Model.hotel.latitude">
-<input id="lng" type="hidden" value="@Model.hotel.longitude">*@
 <script src="js/map.js"></script>

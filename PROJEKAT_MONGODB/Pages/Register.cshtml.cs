@@ -14,6 +14,8 @@ namespace PROJEKAT_MONGODB.Pages
     {
         [BindProperty]
         public Korisnik NoviKorisnik { get; set; }
+        [BindProperty]
+        public string ConfrimPassword { get; set; }
         public string ErrorMessage { get; set; }
         public string Message { get; set; }
         public void OnGet()
@@ -26,10 +28,14 @@ namespace PROJEKAT_MONGODB.Pages
             var collection = db.GetCollection<Korisnik>("korisnici");
 
             Korisnik k = collection.AsQueryable<Korisnik>().Where(x => x.Email == NoviKorisnik.Email).FirstOrDefault();
-
+            if (!NoviKorisnik.Sifra.Equals(ConfrimPassword))
+            {
+                ErrorMessage = "Sifre se ne podudaraju!";
+                return Page();
+            }
             if (k != null)
             {
-                ErrorMessage = "This email address is already used";
+                ErrorMessage = "Vec postoji korisnik sa ovom email adresom!";
                 return Page();
             }
             NoviKorisnik.Tip = 0;

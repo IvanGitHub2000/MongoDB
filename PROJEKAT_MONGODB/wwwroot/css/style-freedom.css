@@ -57,7 +57,7 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #01295c;
+  background-color: dodgerblue;
   color: white;
 }
 
@@ -88,7 +88,7 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #01295c;
+  background-color: dodgerblue;
   color: white;
   
 }
@@ -6196,7 +6196,7 @@ input[type="button"].btn-block {
     color: #fff; }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.5); }
+  color: white; }
   .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
     color: rgba(255, 255, 255, 0.75); }
   .navbar-dark .navbar-nav .nav-link.disabled {
@@ -10208,7 +10208,7 @@ span.diff {
 
 .btn-theme1 {
   padding: 10px 22px;
-  color: #777;
+  color: white;
   font-size: 16px;
   text-transform: capitalize;
   font-weight: 400;
@@ -10340,7 +10340,7 @@ h4.sub-title {
   background-color: transparent; }
 
 .w3l-bootstrap-header nav.navbar {
-  background-color: #01295c; }
+  background-color: dodgerblue; }
 
 .w3l-bootstrap-header a.navbar-brand {
   color: var(--white-color);
@@ -11821,15 +11821,15 @@ button.owl-next {
   font-weight: normal;
   font-size: 16px;
   line-height: 25px;
-  color: #aaa; }
+  color: white; }
 
 .w3l-footer-29-main .footer-list-29 ul li a:hover {
   color: #eee; }
 
 .w3l-footer-29-main .main-social-footer-29 a {
   margin-right: 10px;
-  color: #777;
-  background: #252525;
+  color: dodgerblue;
+  background: white;
   width: 35px;
   height: 35px;
   line-height: 35px;
@@ -11872,7 +11872,7 @@ button.owl-next {
   font-weight: normal;
   font-size: 16px;
   line-height: 25px;
-  color: #aaa; }
+  color: white; }
 
 .w3l-footer-29-main .copy-footer-29 a {
   color: #ccc; }
@@ -15431,15 +15431,16 @@ button.owl-next {
   display: grid;
   align-items: center; }
 
-.w3l-login .login-bg:before {
-  content: "";
-  background: rgba(1, 41, 92, 0.63);
-  position: absolute;
-  top: 0;
-  min-height: 100%;
-  left: 0;
-  right: 0;
-  z-index: -1; }
+    .w3l-login .login-bg:before {
+        content: "";
+        background: rgb(0,206,209);
+        position: absolute;
+        top: 0;
+        min-height: 100%;
+        left: 0;
+        right: 0;
+        z-index: -1;
+    }
 
 .w3l-login a.brand-logo {
   font-size: 36px;
@@ -15451,12 +15452,14 @@ button.owl-next {
 
 .w3l-login .login-form {
   margin-right: auto;
-  max-width: 420px;
+  max-width: 500px;
   border: 1px solid #eee;
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
   border-radius: 4px;
-  background: #fff; }
+  background: khaki;
+  border-radius:35px;
+}
 
 .w3l-login .signin {
   box-sizing: border-box;

@@ -2,18 +2,7 @@
 @model PROJEKAT_MONGODB.Pages.BookingFormModel
 @{
 }
-<section class="w3l-inner-banner-main">
-    <div class="about-inner sear-1">
-        <div class="container">
 
-            <ul class="breadcrumbs-custom-path">
-
-                <li><a href="index-2.html"><span class="fa fa-home" aria-hidden="true"></span> <span class="fa fa-angle-double-right" aria-hidden="true"></span></a></li>
-                <li class="active">Booking</li>
-            </ul>
-        </div>
-    </div>
-</section>
 <!-- //covers -->
 <!---728x90--->
 
@@ -24,16 +13,19 @@
         <div class="donate-form section-gap py-5">
             <div class="container py-md-3">
                 <div class="heading text-center mx-auto">
-                    <h3 class="head">Create reservation</h3>
+                    <h3 class="head">Rezervisi</h3>
                     <p class="my-3 head">
-                        Insert personal informations to create reservation at
-                        <bold>@Model.Kruzer.Naziv in @Model.Kruzer.Gradovi , @Model.Kruzer.Drzave</bold>
+                        Unesite informacije o Vama da biste rezervisali mesto na kruzeru:
+                        <bold>@Model.Kruzer.Naziv </bold>
                         <br>
-                        From
+                        
+                        <bold>Mesta kroz koje prolazi: @foreach (var grad1 in Model.Kruzer.Gradovi) {@grad1.Naziv <bold> </bold>} </bold>
+                      <br >
+                        Od
                         <bold>@Model.ponuda.Pocetak.ToShortDateString()</bold>
-                        to
+                        Do
                         <bold>@Model.ponuda.Kraj.ToShortDateString()</bold>
-                        for
+                        Za samo
                         <bold>@Model.ponuda.Cena </bold>&#8364
                     </p>
                 </div>
@@ -43,33 +35,33 @@
                     <input type="hidden" asp-for="@Model.KruzerId">
                     <div class="form-one">
                         <div class="form-input">
-                            <label>First Name:</label>
-                            <input type="text" asp-for="@Model.ime" placeholder="Enter your first name.." required />
+                            <label>Ime:</label>
+                            <input type="text" asp-for="@Model.ime" placeholder="Unesite Vase ime.." required />
                         </div>
                         <div class="form-input">
-                            <label>Last Name:</label>
-                            <input type="text" asp-for="@Model.Prezime" placeholder="Enter your last name.." required>
+                            <label>Prezime:</label>
+                            <input type="text" asp-for="@Model.Prezime" placeholder="Unesite Vase prezime.." required>
                         </div>
                         <div class="form-input">
-                            <label>Passport no:</label>
-                            <input type="number" id="passport" asp-for="@Model.brojPasosa" placeholder="Enter your passport number.." required />
+                            <label>Broj pasosa:</label>
+                            <input type="number" id="passport" asp-for="@Model.brojPasosa" placeholder="Unesite Vas broj pasosa.." required />
                         </div>
                         <div class="form-input">
-                            <label>Phone Number:</label>
-                            <input type="text" asp-for="@Model.brTelefona" placeholder="Phone.." required />
+                            <label>Kontakt Telefon:</label>
+                            <input type="text" asp-for="@Model.brTelefona" placeholder="Broj telefona.." required />
                         </div>
 
                         <div class="form-input">
-                            <label> No. of beds</label>
+                            <label> Broj kreveta</label>
                             <select asp-for="brojMesta" asp-items="@Model.kapacitet">
-                                <option value="">Select capacity</option>
+                                <option value="">Odaberite kabine</option>
                             </select>
                         </div>
 
 
                     </div>
 
-                    <button class="btn button-eff">Book Now</button>
+                    <button class="btn button-eff" style=" background-color: dodgerblue;">Kliknite da rezervisite</button>
                 </form>
             </div>
         </div>

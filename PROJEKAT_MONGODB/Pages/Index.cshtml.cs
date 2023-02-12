@@ -42,7 +42,7 @@ namespace PROJEKAT_MONGODB.Pages
 
         public void OnGet()
         {
-            topRated = _dbKruzeri.AsQueryable<Kruzer>().OrderByDescending(Hotel => Hotel.BrojZvezdica).Take(4).ToList();
+            topRated = _dbKruzeri.AsQueryable<Kruzer>().OrderByDescending(Kruzer => Kruzer.BrojZvezdica).ToList();
 
 
 
@@ -58,7 +58,7 @@ namespace PROJEKAT_MONGODB.Pages
         }
         public IActionResult OnGetLogout()
         {
-            HttpContext.Session.Remove("email");
+            HttpContext.Session.Remove("Email");
             Message = null;
             return RedirectToPage("/Index");
             //<a asp-page="/Index" asp-page-handler="Logout">Logout</a>

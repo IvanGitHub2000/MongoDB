@@ -14,34 +14,34 @@ namespace PROJEKAT_MONGODB.Pages
 {
     public class AdminModel : PageModel
     {
-        private readonly IMongoCollection<Kruzer> kr;//h
-        private readonly IMongoCollection<Ponuda> p;//a
-        private readonly IMongoCollection<Korisnik> ko;//k
-        private readonly IMongoCollection<Rezervacija> r;//r
-        private readonly IMongoCollection<Kabina> ka;//s
+        private readonly IMongoCollection<Kruzer> kr;
+        private readonly IMongoCollection<Ponuda> p;
+        private readonly IMongoCollection<Korisnik> ko;
+        private readonly IMongoCollection<Rezervacija> r;
+        private readonly IMongoCollection<Kabina> ka;
         [BindProperty]
         public List<Kruzer> kruzeri { get; set; }
         [BindProperty]
         public List<Korisnik> korisnici { get; set; }
         [BindProperty]
         public List<Rezervacija> rezervacije { get; set; }
+        //[BindProperty]
+        //public List<Kruzer> kruzeriMenadzera { get; set; }
         [BindProperty]
-        public List<Kruzer> kruzeriMenadzera { get; set; }//hoteliMedandzera
+        public List<Ponuda> ponudeRezervacija { get; set; }
         [BindProperty]
-        public List<Ponuda> ponudeRezervacija { get; set; }//aranzmani ponuda
-        [BindProperty]
-        public List<Kruzer> kruzeriRezervacija { get; set; }//hotelirezervacija
+        public List<Kruzer> kruzeriRezervacija { get; set; }
         [BindProperty]
         public List<Korisnik> menadzeriRezervacija { get; set; }
         [BindProperty]
         public List<Korisnik> menadzeri { get; set; }
         [BindProperty]
-        public List<Ponuda> ponude { get; set; }//aranzmani
-        [BindProperty]
-        public List<Kruzer> kruzeriPonuda { get; set; }//hoteliaranzmana
+        public List<Ponuda> ponude { get; set; }
+        //[BindProperty]
+        //public List<Kruzer> kruzeriPonuda { get; set; }
         public string Message { get; set; }
 
-        public AdminModel(IDatabaseSettings settings)
+        public AdminModel(/*IDatabaseSettings settings*/)
         {
             var client = new MongoClient("mongodb://localhost/?safe=true");
             var database = client.GetDatabase("SEVENSEAS");
@@ -50,13 +50,13 @@ namespace PROJEKAT_MONGODB.Pages
             ko = database.GetCollection<Korisnik>("korisnici");
             p = database.GetCollection<Ponuda>("ponude");
             r = database.GetCollection<Rezervacija>("rezervacije");
-            kruzeriMenadzera = new List<Kruzer>();
+            //kruzeriMenadzera = new List<Kruzer>();
             menadzeriRezervacija = new List<Korisnik>();
             ponudeRezervacija = new List<Ponuda>();
             kruzeriRezervacija = new List<Kruzer>();
             menadzeri = new List<Korisnik>();
             ponude = new List<Ponuda>();
-            kruzeriPonuda = new List<Kruzer>();
+            //kruzeriPonuda = new List<Kruzer>();
         }
 
         public void OnGet()
@@ -71,11 +71,9 @@ namespace PROJEKAT_MONGODB.Pages
             }
 
 
-            //var test = values.Select(v => BsonSerializer.Deserialize<Property>(v));
-            //kruzeri = kr.Find(Builders<Kruzer>.Filter.Empty).ToList();
             kruzeri = kr.Find(x => true).ToList();
-            rezervacije = r.Find(x => true).ToList();//kad se promeni status pukne na aktivno resi ovo sa if uslov neki
-            korisnici = ko.Find(x => x.Tip == 0).ToList();
+            rezervacije = r.Find(x => true).ToList();
+            korisnici = ko.Find(x => x.Tip == 0).ToList();  
             ponude = p.Find(x => true).ToList();
             foreach (Rezervacija rez in rezervacije)
             {
@@ -100,13 +98,17 @@ namespace PROJEKAT_MONGODB.Pages
             //}
             //foreach (Korisnik kor in menadzeri)
             //{
-            //    var kruzer = kr.Find(x => x != null && x.Id.Equals(new ObjectId(kor.Kruzer.Id.ToString()))).FirstOrDefault();
+            //    if(kor==null)
+            //    {
+            //        continue;
+            //    }
+            //    var kruzer = kr.Find(x => x.Id.Equals(new ObjectId(kor.Kruzer.Id.ToString()))).FirstOrDefault();
             //    if (kruzer != null)
             //    {
             //        kruzeriMenadzera.Add(kruzer);
             //    }
             //}
-            //PROMENI U PRIKAZU DA SE IME KORISNIKA VADI IZ REZERVACIJE, A NE IZ KORISNIKA
+
         }
 
         public IActionResult OnPostObrisiRez(string id)
@@ -130,10 +132,10 @@ namespace PROJEKAT_MONGODB.Pages
             return RedirectToPage();
         }
 
-        public IActionResult OnPostObrisiHotel(string id)
+        public IActionResult OnPostObrisiKruzer(string id)
         {
             Kruzer kruzer = kr.Find(x => x.Id.Equals(new ObjectId(id))).FirstOrDefault();
-            //brisanje menadzera hotela
+            //brisanje menadzera kruzera
             var filter1 = Builders<Korisnik>.Filter.Eq("Kruzer.Id", new ObjectId(id));
             ko.DeleteOne(filter1);
             //brisanje soba hotela
@@ -142,16 +144,16 @@ namespace PROJEKAT_MONGODB.Pages
                 var filter2 = Builders<Kabina>.Filter.Eq("Id", kabinaRef.Id);
                 ka.DeleteOne(filter2);
             }
-            //brisanje aranzmana vezanih za hotel
+            //brisanje ponuda vezanih za kruzer
             foreach (MongoDBRef ponudaRef in kruzer.Ponude.ToList())
             {
                 var filter3 = Builders<Ponuda>.Filter.Eq("Id", ponudaRef.Id);
                 p.DeleteOne(filter3);
             }
-            //brisanje rezervacija vezanih za taj hotel
+            //brisanje rezervacija vezanih za taj kruzer
             var filter = Builders<Rezervacija>.Filter.Eq("Kruzer.Id", new ObjectId(id));
             r.DeleteMany(filter);
-            //brisanje hotela
+            //brisanje kruzera
             kr.DeleteOne(x => x.Id.Equals(new ObjectId(id)));
 
             return RedirectToPage();

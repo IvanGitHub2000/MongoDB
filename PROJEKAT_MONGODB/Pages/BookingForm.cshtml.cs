@@ -67,7 +67,7 @@ namespace PROJEKAT_MONGODB.Pages
                 return RedirectToPage("/Index");
             KruzerId = kruzer;
             ponudaId = id;
-            // List<Aranzman> zav=_dbAranzmani.Find(ar=>true).ToList();
+        
             List<Ponuda> zabranjenePonude= _dbPonude.Find(p => p.Kruzer.Id == Kruzer.Id &&
                                    (
                                    (p.Pocetak.CompareTo(ponuda.Pocetak) >= 0 && p.Pocetak.CompareTo(ponuda.Kraj) <= 0) ||
@@ -83,7 +83,7 @@ namespace PROJEKAT_MONGODB.Pages
             List<Kabina> dozvoljeneKabine = new List<Kabina>();
             List<Kabina> sveKabine = _dbKabine.Find(kabina => kabina.Kruzer.Id == Kruzer.Id).ToList();
 
-            /*dozvoljeneSobe.AddRange(_dbSobe.Find(soba => soba.hotel.Id==Hotel.Id&&soba.Rezervacije.Contains(rez.Id)).ToList()); */
+            /*dozvoljeneKabine.AddRange(_dbKabine.Find(kabina => kabina.Kruzer.Id==Kruzer.Id&&kabina.Rezervacije.Contains(rez.Id)).ToList()); */
 
             foreach (Kabina k in sveKabine)
             {

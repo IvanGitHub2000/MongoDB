@@ -7,78 +7,65 @@
     <div class="container">
         <div class="register">
             <div style="width:100%;display: flex;flex-direction:row;justify-content:space-between;">
-                <h3>PROVIDE INFORMATIONS ABOUT YOUR BUSINESS</h3>
+                <h3>UNESITE INFORMACIJE O VASEM POSLOVANJU I KRUZERU</h3>
 
             </div><br><br>
             <form id="signupForm" method="post" enctype="multipart/form-data">
 
                 <div class="bi-name-type h-container">
                     <span class="bi-name v-container wow fadeInLeft">
-                        <div class="form-element-label">NAME*</div>
+                        <div class="form-element-label">NAZIV*</div>
                         <input type="text" id="name-val" value="" asp-for="noviKruzer.Naziv">
-                        <label class="error" style="visibility: hidden;">This field is required.</label>
+                        <label class="error" style="visibility: hidden;">Obavezno unesite ovo polje.</label>
                     </span>
                 </div>
-                <div class="bi-address-city-mapBtn">
-                    @*<span class="bi-address wow fadeInLeft">
-                            <div class="form-element-label">ADDRESS*</div>
-                            <input type="text" id="address-val" value="" asp-for="noviHotel.Adresa">
-                            <label class="error" style="visibility: hidden;">This field is required.</label>
-                        </span>*@
                     <span class="bi-city wow fadeInRight">
-                        <div class="form-element-label">City*</div>
+                        <div class="form-element-label">Gradovi* (Unesite imena gradova kroz koje ce kruzer prolaziti i odvojite ih zarezom. Primer:Napulj,Madrid,Valensija)</div>
                         <input type="text" id="city-val" value="" asp-for="cities">
-                        <label class="error" style="visibility: hidden;">This field is required.</label>
+                        <label class="error" style="visibility: hidden;">Obavezno unesite ovo polje.</label>
                     </span>
                     <span class="bi-city wow fadeInRight">
-                        <div class="form-element-label">Country*</div>
+                        <div class="form-element-label">Drzave* (Unesite imena drzava kroz koje ce kruzer prolaziti i odvojite ih zarezom. Primer:Italija,Spanija,Portugal)</div>
                         <input type="text" id="country-val" value="" asp-for="states">
-                        <label class="error" style="visibility: hidden;">This field is required.</label>
+                        <label class="error" style="visibility: hidden;">Obavezno unesite ovo polje.</label>
                     </span>
-                    <span class="bi-mapBtn wow fadeInRight">
-                        <div class="form-element-label">Mark location*</div>
-                        <span style="font-size: 2em;color:rgb(255,91,54);">
-                            <i id="bi-open-map" class="fas fa-map-marker-alt"></i>
-                        </span>
-                        <div class="error" style="visibility: hidden;">Set marker.</div>
-                    </span>
+                  
                     <span class="bi-city wow fadeInRight">
-                        <div class="form-element-label">Phone Number*</div>
+                        <div class="form-element-label">Kontakt Telefon*</div>
                         <input type="text" id="tel-val" value="" asp-for="noviKruzer.KontaktTelefon">
-                        <label class="error" style="visibility: hidden;">This field is required.</label>
+                        <label class="error" style="visibility: hidden;">Obavezno unesite ovo polje.</label>
                     </span>
                     <span class="bi-type v-container wow fadeInRight">
-                        <div class="form-element-label">No. of stars*</div>
+                        <div class="form-element-label">Broj zvezdica*</div>
                         <select asp-for="noviKruzer.BrojZvezdica" id="bi-business-star">
-                            <option value="">Choose one...</option>
+                            <option value="">Odaberite...</option>
+                            <option value="6">******</option>
                             <option value="5">*****</option>
                             <option value="4">****</option>
                             <option value="3">***</option>
                             <option value="2">**</option>
                             <option value="1">*</option>
-
                         </select>
-                        <div class="error" style="visibility: hidden;">Select one option.</div>
+                        <div class="error" style="visibility: hidden;">Odaberite jednu opciju.</div>
                     </span>
-                </div>
-
+                
 
                 <div class="bi-description wow fadeInLeft">
-                    <div class="form-element-label">DESCRIPTION</div>
+                    <div class="form-element-label">OPIS</div>
                     <textarea class="bi-description-val" maxlength="420" id="desc-val" rows="6" asp-for="noviKruzer.Opis"></textarea>
-                    <label class="error" style="visibility: hidden;">This field is required.</label>
+                    <label class="error" style="visibility: hidden;">Obavezno unesite ovo polje.</label>
                 </div>
                 <div class="bi-image wow fadeInLeft">
                     <div class="form-element-label">Dodaj sliku*</div>
                     <div class="bi-images-import">
                         <label for="files">Select multiple files: </label>
                         <input id="import-files" type="file" accept="image/*" multiple />
-                        <label class="image-user-info">Import 4 pictures</label>
+                        <label class="image-user-info">Importuj 4 slike</label>
                         <table style="display:none;" id="import-table" class="table">
                             <thead>
                             <th>Slika</th>
                             <th>Setuj glavnu sliku</th>
-                            <th>Obrisi</th>
+                            @*<th>Obrisi</th>*@
                             <th>Ime</th>
                             </thead>
 
@@ -89,34 +76,22 @@
                     </div>
                 </div>
 
-
-                @*<div id="bi-map-modal" class="modal">
-                        <div class="modal-content">
-                            <div class="map-title-x"><br /><h3 class="form-element-label">Set marker on your business's location</h3><span class="bi-map-modal-close">&times;</span></div>
-                            <div id="bi-map"></div>
-                            <label class="btn button-eff" id="doneWithMap" class="register-but">DONE</label>
-                        </div>
-                    </div>*@
-
                 <div class="bi-description wow fadeInLeft">
-                    <div class="form-element-label">Sobe </div><br>
+                    <div class="form-element-label">Kabine </div><br>
                     <span>
-                        New room:  <span>
-                            <input id="room-label" type="text" placeholder="Room label">
-                            <input id="room-bed-no" min="1" type="number" placeholder="Bed no.">
+                        Nova kabina:  <span>
+                            <input id="room-label" type="text" placeholder="Naziv kabine">
+                            <input id="room-bed-no" min="1" type="number" placeholder="Broj kreveta">
                         </span>
-                        <button type="button" onclick="dodajSobu(this)">Dodaj kabinu</button>
+                        <button type="button" onclick="dodajKabinu(this)">Dodaj kabinu</button>
                     </span>
 
 
                     <br>
                 </div>
                 <br><br><br>
-
-                @*<input type="text" id="mapLongitude" value="" asp-for="noviHotel.longitude" style="display: none;">
-                    <input type="text" id="mapLatitude" value="" asp-for="noviHotel.latitude" style="display: none;">*@
                 <div class="bi-buttons wow fadeInLeft">
-                    <button class="btn button-eff" type="submit" asp-page-handler="next" class="register-but" id="bi-finish">Finish</button>
+                    <button class="btn button-eff" type="submit" asp-page-handler="next" class="register-but" id="bi-finish">PRIJAVA</button>
 
                 </div>
                 <script src="js/validateEmail.js"></script>
@@ -180,9 +155,9 @@
                     } else if (currImported < 4) {
                         let pom = 4 - currImported;
                         if (pom == 1)
-                            alertUser("Upload " + pom + " more picture!");
+                            alertUser("Unesite jos " + pom + " slika!");
                         else
-                            alertUser("Upload " + pom + " more pictures!");
+                            alertUser("Unesite jos " + pom + " slika!");
                     }
                     else {
                         alertUser("");
@@ -225,7 +200,7 @@
             var filesInput = document.getElementById("import-files");
             filesInput.addEventListener("change", function pictureNotificationMessage(event) {
                 let currImported = document.querySelectorAll(".imported-picture").length;
-                var files = event.target.files; //FileList object
+                var files = event.target.files;
                 var output = document.querySelector("#import-table tbody");
                 var faultyImages = 0;
                 for (let index = 0; index < files.length; index++)
@@ -234,17 +209,17 @@
                     }
                 if (files.length - faultyImages + currImported < 4) {
                     let pom = 4 - (files.length - faultyImages + currImported);
-                    if (pom == 1) { alertUser("Upload " + pom + " more picture!"); }
-                    else { alertUser("Upload " + pom + " more pictures!"); }
+                    if (pom == 1) { alertUser("Unesite jos " + pom + " slika!"); }
+                    else { alertUser("Unesite jos " + pom + " slika!"); }
                 }
                 else if (files.length + currImported > 4) {
                     let pom = 4 - currImported;
                     if (pom == 1)
-                        alertUser("Too many pictures imported. Only " + pom + " more allowed!");
+                        alertUser("Uneli ste previse slika. Jos samo " + pom + " dozvoljeno!");
                     else if (pom == 0)
-                        alertUser("No more pictures allowed. Remove some if you want to add more");
+                        alertUser("Ne smete vise ubacivati slike. Obrisite neke ako zelite da dodate nove.");
                     else
-                        alertUser("Too many pictures imported. Only " + pom + " more allowed!");
+                        alertUser("Previse slika uneto. Jos samo  " + pom + " dozvoljeno!");
                     return;
                 }
                 else
@@ -264,7 +239,7 @@
             });
         }
         else {
-            console.log("Your browser does not support File API");
+            console.log("Vas browser nema podrsku za File API");
         }
     }
 </script>
@@ -273,7 +248,7 @@
 
 <script>
     let counter = 0;
-    function dodajSobu(ev) {
+    function dodajKabinu(ev) {
         let labela = ev.parentElement.querySelector("#room-label");
         let no = ev.parentElement.querySelector("#room-bed-no");
         if (labela.value == "" || no.value == "")
@@ -290,7 +265,7 @@
             ev.target.parentElement.remove();
         }
         par.appendChild(span);
-        el.name = "sobe";
+        el.name = "kabine";
         el.type = "text";
         el.readOnly = "disabled";
         el.value = labela.value + "|" + no.value;
@@ -306,7 +281,7 @@
             if (el.value == "" && el.id != "room-label")
                 return true;
         });
-        if (document.querySelectorAll("[name^=sobe]").length == 0)
+        if (document.querySelectorAll("[name^=kabine]").length == 0)
             return true;
     }
     document.querySelector("#signupForm").onsubmit = function submitFormAction(e) {
